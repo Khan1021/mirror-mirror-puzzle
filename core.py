@@ -75,3 +75,25 @@ def move_character(state: GameState, direction: str):
         # Move character to the new position
         state.grid[new_y][new_x] = state.grid[y][x]
         state.grid[y][x] = None  # Clear the old position
+
+
+#takes current direction of projectile and mirror's angle, return new direction of projectile after reflection
+def reflect(direction: str,angle: int) -> str:
+    if angle == 45:
+        if direction == "right":
+            return "up"
+        if direction == "left":
+            return "down"
+        if direction == "up":
+            return "right"
+        if direction == "down":
+            return "left"
+    if angle == -45:
+        if direction == "right":
+            return "down"
+        if direction == "left":
+            return "up"
+        if direction == "up":
+            return "left"
+        if direction == "down":
+            return "right"
