@@ -71,7 +71,7 @@ def move_character(state: GameState, direction: str):
         state.grid[y][x].direction = "right"   #character now facing right
 
     # Check boundaries
-    if 0 <= new_x < state.width and 0 <= new_y < state.height:
+    if 0 <= new_x < state.width and 0 <= new_y < state.height and not isinstance(state.grid[new_y][new_x],Tree):
         # Move character to the new position
         state.grid[new_y][new_x] = state.grid[y][x]
         state.grid[y][x] = None  # Clear the old position
