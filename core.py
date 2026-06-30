@@ -72,13 +72,14 @@ def move_character(state: GameState, direction: str):
 
     # Check boundaries
     if 0 <= new_x < state.width and 0 <= new_y < state.height and not isinstance(state.grid[new_y][new_x],Tree):
+        if isinstance(state.grid[new_y][new_x],Crate):
+            state.grid[new_y][new_x] = None   #destroy crate if character moves into it
+            return True   #crate destroyed and game won
         # Move character to the new position
         state.grid[new_y][new_x] = state.grid[y][x]
         state.grid[y][x] = None  # Clear the old position
 
-    if isinstance(state.grid[new_y][new_x],Crate):
-        state.grid[new_y][new_x] = None   #destroy crate if character moves into it
-        return True   #crate destroyed and game won
+    
 
 
 #takes current direction of projectile and mirror's angle, return new direction of projectile after reflection
