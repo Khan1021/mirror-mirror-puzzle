@@ -147,10 +147,11 @@ def shoot(state: GameState):
 #main loop needed to run function
 def run_game(state: GameState,instructions:str):
     for instruction in instructions:
+        if instruction in ["W","A","S","D"]:
+           if move_character(state, instruction):
+               return True   #crate destroyed, game won
             
-        if move_character(state,instruction)==True:
-            return True   #crate destroyed, game won
-        
+         
         elif instruction=="X":
             if shoot(state):
                 return True   #crate destroyed, game won
