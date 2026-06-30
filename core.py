@@ -1,4 +1,6 @@
 from dataclasses import dataclass
+import copy
+
 
 @dataclass
 class Character:
@@ -146,12 +148,21 @@ def shoot(state: GameState):
 
 #main loop needed to run function
 def run_game(state: GameState,instructions:str):
+    state=copy.deepcopy(state)    #create a copy of the state so that the state does not point to the same object and change together
+    steps=[]
+    
     for instruction in instructions:
         if instruction in ["W","A","S","D"]:
-           if move_character(state, instruction):
-               return True   #crate destroyed, game won
-            
-         
-        elif instruction=="X":
+            if move_character(state, instruction):
+                steps.append(copy.deepcopy(state))
+                return True, steps   #crate destroyed, game won
+            steps.append(copy.deepcopy(state))
+
+        elif instruction == "X":
             if shoot(state):
-                return True   #crate destroyed, game won
+                steps.append(copy.deepcopy(state))
+                return True, steps   #crate destroyed, game won
+            steps.append(copy.deepcopy(state))
+
+    #if loop reaches here, game is not won
+    return steps
