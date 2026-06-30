@@ -136,3 +136,15 @@ def shoot(state: GameState):
             state.grid[y][x]=None   #hit a crate, destroy it
             return True
             
+
+        
+
+#main loop needed to run function
+def run_game(state: GameState,instructions:str):
+    for instruction in instructions:
+        if instruction in ["W","A","S","D"]:
+           move_character(state,instruction)
+            
+        elif instruction=="X":
+            if shoot(state):
+                return True   #crate destroyed, game won
