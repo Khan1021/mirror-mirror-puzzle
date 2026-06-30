@@ -97,3 +97,40 @@ def reflect(direction: str,angle: int) -> str:
             return "left"
         if direction == "down":
             return "right"
+
+
+def shoot(state: GameState):
+    char_pos=find_character(state)
+    if char_pos==None:
+        return None #no character found 
+    
+
+    x,y=char_pos
+    character = state.grid[y][x]
+    direction = character.direction
+
+    while True:
+        if direction =="up":
+            y-=1
+        elif direction =="down":
+            y+=1
+        elif direction =="left":
+            x-=1
+        elif direction =="right":
+            x+=1
+    
+        # Check boundaries
+        if not (0<=x<state.width and  0<=y<state.height):
+            break   #hit the wall
+        if isinstance(state.grid[y][x],Tree):
+            break   #hit a Tree
+
+        #check if projectile hits a mirror
+        if isinstance(state.grid[y][x],Mirror):
+            reflect(direction,state.grid[y][x].angle)   #hit a mirror, reflect the projectile
+
+        #check if projectile hits a crate
+        if isinstance(state.grid[y][x],Crate):
+            state.grid[y][x]=None   #hit a crate, destroy it
+            break
+            
