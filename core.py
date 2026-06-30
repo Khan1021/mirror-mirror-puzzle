@@ -119,18 +119,20 @@ def shoot(state: GameState):
         elif direction =="right":
             x+=1
     
-        # Check boundaries
+        # Check boundaries of grid
         if not (0<=x<state.width and  0<=y<state.height):
             break   #hit the wall
+
+        #check if projectile hits tree, stop projectile 
         if isinstance(state.grid[y][x],Tree):
             break   #hit a Tree
 
-        #check if projectile hits a mirror
+        #check if projectile hits a mirror, bounce and keep playing
         if isinstance(state.grid[y][x],Mirror):
-            reflect(direction,state.grid[y][x].angle)   #hit a mirror, reflect the projectile
+           direction=reflect(direction,state.grid[y][x].angle)   #hit a mirror, reflect the projectile
 
-        #check if projectile hits a crate
+        #check if projectile hits a crate, returns True so user can finish game
         if isinstance(state.grid[y][x],Crate):
             state.grid[y][x]=None   #hit a crate, destroy it
-            break
+            return True
             
