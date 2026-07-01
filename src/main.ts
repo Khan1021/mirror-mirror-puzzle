@@ -37,3 +37,25 @@ const sampleState: GameState ={
         [{type: "tree"}, null, {type: "tree"}]
     ]
 };
+
+
+// helper function that converts single cell into an emoji
+function cellToEmoji(cell: Cell): string{
+    if (cell==null){
+        return " ";
+    };
+    if (cell.type == "crate"){
+        return "📦";
+    };
+    if (cell.type=="tree"){
+        return "🌳";
+    };
+    if (cell.type=="mirror"){
+        return "🪞";
+    };
+    if (cell.type=="character"){
+        return "🧍";
+    };
+    
+    return " ";
+};
