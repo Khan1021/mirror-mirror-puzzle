@@ -32,5 +32,16 @@ function cellToEmoji(cell) {
     return " ";
 }
 ;
+function renderGrid(state) {
+    const rows = [];
+    for (let y = 0; y < state.height; y++) {
+        const rowSymbols = [];
+        for (let x = 0; x < state.width; x++) {
+            rowSymbols.push(cellToEmoji(state.grid[y][x]));
+        }
+        rows.push(rowSymbols.join(""));
+    }
+    return rows.join("\n");
+}
 export {};
 //# sourceMappingURL=main.js.map

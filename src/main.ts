@@ -59,3 +59,18 @@ function cellToEmoji(cell: Cell): string{
     
     return " ";
 };
+
+
+
+function renderGrid(state: GameState): string{
+    const rows:string[]=[];
+
+    for(let y=0;y<state.height;y++){
+        const rowSymbols:string[]=[];
+        for (let x=0;x<state.width;x++){
+            rowSymbols.push(cellToEmoji(state.grid[y]![x]!));
+        }
+        rows.push(rowSymbols.join(""));
+    }
+    return rows.join("\n");
+}
