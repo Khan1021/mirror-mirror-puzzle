@@ -2,10 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <style>
+    body{
+      height:100vh;
+      margin:0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+    }
+    #grid{
+      font-size:4rem;
+      line-height:1.1;
+    }
+  </style>
   <title>Mirror Mirror Puzzle</title>
 </head>
 <body>
   <pre id="grid"></pre>
+  <div id="status"></div>
+  <button id="prev">Prev</button>
+  <button id="next">Next</button>
   <script type="module" src="dist/main.js"></script>
 </body>
 </html>
