@@ -164,16 +164,47 @@ def run_game(state: GameState,instructions:str):
     
     for instruction in instructions:
         if instruction in ["W","A","S","D"]:
-            if move_character(state, instruction):
-                steps.append(copy.deepcopy(state))
-                return True, steps   #crate destroyed, game won
+            won = move_character(state, instruction)
             steps.append(copy.deepcopy(state))
+            if won:
+                return True, steps   #crate destroyed, game won
 
         elif instruction == "X":
-            if shoot(state):
-                steps.append(copy.deepcopy(state))
-                return True, steps   #crate destroyed, game won
+            won = shoot(state)
             steps.append(copy.deepcopy(state))
+            if won:
+                return True, steps   #crate destroyed, game won
 
-    #if loop reaches here, game is not won
-    return steps
+    #instructions finished without winning
+    return False, steps
+
+
+#converts a single grid cell (entity or None) into a JSON-friendly dict tagged with its type
+def entity_to_dict(entity):
+    if entity is None:
+        return None
+    if isinstance(entity, Character):
+        return {"type": "character", "direction": entity.direction}
+    if isinstance(entity, Tree):
+        return {"type": "tree"}
+    if isinstance(entity, Mirror):
+        return {"type": "mirror", "angle": entity.angle}
+    if isinstance(entity, Crate):
+        return {"type": "crate"}
+
+
+def state_to_dict(state: GameState):
+    return {
+        "width": state.width,
+        "height": state.height,
+        "grid": [[entity_to_dict(cell) for cell in row] for row in state.grid],
+    }
+
+
+#runs the game and returns a JSON-friendly dict with the final result and every intermediate step
+def export_game(state: GameState, instructions: str):
+    won, steps = run_game(state, instructions)
+    return {
+        "won": won,
+        "steps": [state_to_dict(step) for step in steps],
+    }
