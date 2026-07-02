@@ -48,5 +48,5 @@ movement) — this was an existing gap in the original logic, left as-is for tim
 mirror only affects `X`'s projectile simulation, not footstep movement.
 
 ## Grid size
-The sample world in `export.py` uses a 5x5 grid (up from an initial 3x3 scratch example) to
+The sample world in `export.py` uses a 5x5 grid to
 better demonstrate movement, a mirror bounce, and obstacles together in one run.
