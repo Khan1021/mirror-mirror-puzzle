@@ -43,5 +43,9 @@ function renderGrid(state) {
     }
     return rows.join("\n");
 }
+const gridElement = document.getElementById("grid");
+if (gridElement !== null) {
+    gridElement.textContent = renderGrid(sampleState);
+}
 export {};
 //# sourceMappingURL=main.js.map

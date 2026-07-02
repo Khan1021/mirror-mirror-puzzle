@@ -75,7 +75,9 @@ def move_character(state: GameState, direction: str):
     # Check boundaries
     if 0 <= new_x < state.width and 0 <= new_y < state.height and not isinstance(state.grid[new_y][new_x],Tree):
         if isinstance(state.grid[new_y][new_x],Crate):
-            state.grid[new_y][new_x] = None   #destroy crate if character moves into it
+            character = state.grid[y][x]
+            state.grid[y][x] = None   #clear old position
+            state.grid[new_y][new_x] = character   #character moves onto crate cell, destroying it
             return True   #crate destroyed and game won
         # Move character to the new position
         state.grid[new_y][new_x] = state.grid[y][x]
@@ -115,6 +117,8 @@ def shoot(state: GameState):
     x,y=char_pos
     character = state.grid[y][x]
     direction = character.direction
+    
+    land_x,land_y=x,y
 
     while True:
         if direction =="up":
@@ -134,17 +138,24 @@ def shoot(state: GameState):
         if isinstance(state.grid[y][x],Tree):
             break   #hit a Tree
 
+        land_x, land_y = x, y
+
         #check if projectile hits a mirror, bounce and keep playing
         if isinstance(state.grid[y][x],Mirror):
            direction=reflect(direction,state.grid[y][x].angle)   #hit a mirror, reflect the projectile
 
         #check if projectile hits a crate, returns True so user can finish game
         if isinstance(state.grid[y][x],Crate):
-            state.grid[y][x]=None   #hit a crate, destroy it
-            return True
-            
+            state.grid[char_pos[1]][char_pos[0]]=None   #clear old position of character
+            state.grid[y][x]=character      #character teleports onto crate cell
+            character.direction=direction   #face new direction
+            return True   #crate destroyed, game won
 
-        
+    #projectile stopped without hitting a crate - teleport character to last safe cell
+    state.grid[char_pos[1]][char_pos[0]] = None
+    state.grid[land_y][land_x] = character
+    character.direction = direction
+
 
 #main loop needed to run function
 def run_game(state: GameState,instructions:str):

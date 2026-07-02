@@ -74,3 +74,8 @@ function renderGrid(state: GameState): string{
     }
     return rows.join("\n");
 }
+
+const gridElement = document.getElementById("grid");
+if (gridElement !== null) {
+    gridElement.textContent = renderGrid(sampleState);
+}
