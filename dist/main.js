@@ -23,16 +23,17 @@ function cellToEmoji(cell) {
     return " ";
 }
 ;
-function renderGrid(state) {
-    const rows = [];
+function renderGrid(state, container) {
+    container.innerHTML = "";
+    container.style.gridTemplateColumns = `repeat(${state.width}, auto)`;
     for (let y = 0; y < state.height; y++) {
-        const rowSymbols = [];
         for (let x = 0; x < state.width; x++) {
-            rowSymbols.push(cellToEmoji(state.grid[y][x]));
+            const cellDiv = document.createElement("div");
+            cellDiv.className = "cell";
+            cellDiv.textContent = cellToEmoji(state.grid[y][x]);
+            container.appendChild(cellDiv);
         }
-        rows.push(rowSymbols.join(""));
     }
-    return rows.join("\n");
 }
 const gridElement = document.getElementById("grid");
 const statusElement = document.getElementById("status");
@@ -43,7 +44,7 @@ let currentStep = 0;
 let won = false;
 function showStep() {
     if (gridElement !== null) {
-        gridElement.textContent = renderGrid(steps[currentStep]);
+        renderGrid(steps[currentStep], gridElement);
     }
     if (statusElement !== null) {
         const winText = won && currentStep === steps.length - 1 ? " — WON!" : "";
