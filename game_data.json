@@ -177,6 +177,116 @@
           null,
           null,
           {
+            "type": "crate"
+          },
+          {
+            "type": "tree"
+          }
+        ],
+        [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          {
+            "type": "character",
+            "direction": "up"
+          },
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          {
+            "type": "mirror",
+            "angle": 45
+          },
+          {
+            "type": "tree"
+          }
+        ]
+      ]
+    },
+    {
+      "width": 5,
+      "height": 5,
+      "grid": [
+        [
+          {
+            "type": "tree"
+          },
+          null,
+          null,
+          {
+            "type": "crate"
+          },
+          {
+            "type": "tree"
+          }
+        ],
+        [
+          null,
+          null,
+          null,
+          {
+            "type": "character",
+            "direction": "up"
+          },
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        [
+          null,
+          null,
+          null,
+          {
+            "type": "mirror",
+            "angle": 45
+          },
+          {
+            "type": "tree"
+          }
+        ]
+      ]
+    },
+    {
+      "width": 5,
+      "height": 5,
+      "grid": [
+        [
+          {
+            "type": "tree"
+          },
+          null,
+          null,
+          {
             "type": "character",
             "direction": "up"
           },

@@ -20,7 +20,7 @@ place_entity(state, Tree(), x=0, y=0)
 place_entity(state, Tree(), x=4, y=0)
 place_entity(state, Tree(), x=4, y=4)
 
-instructions = "SSDX"
+instructions = "SSDXWW"
 
 result = export_game(state, instructions)
 
